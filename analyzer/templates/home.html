@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="min-h-screen flex items-center justify-center p-6">
+
+    <div class="bg-white shadow-2xl rounded-3xl p-8 w-full max-w-3xl">
+
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-2">
+            AI Resume Analyzer
+        </h1>
+
+        <p class="text-center text-gray-500 mb-8">
+            Upload your resume and get ATS insights instantly
+        </p>
+
+        <form method="POST" enctype="multipart/form-data" class="space-y-6">
+
+            {% csrf_token %}
+
+            <div>
+                <label class="block mb-2 font-semibold">
+                    Job Role
+                </label>
+
+                <input
+                    type="text"
+                    name="role"
+                    placeholder="e.g. Full Stack Developer"
+                    class="w-full border rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    required
+                >
+            </div>
+
+            <div>
+                <label class="block mb-2 font-semibold">
+                    Upload Resume
+                </label>
+
+                <input
+                    type="file"
+                    name="resume"
+                    class="w-full border rounded-xl p-3"
+                    required
+                >
+            </div>
+<button
+    type="submit"
+    onclick="this.innerHTML='Analyzing...'"
+    class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition"
+>
+    Analyze Resume
+</button>
+
+        </form>
+
+        {% if result %}
+
+        <div class="mt-10">
+
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">
+                Analysis Result
+            </h2>
+
+            <div class="bg-gray-900 text-green-400 p-6 rounded-2xl overflow-auto">
+
+                <pre class="whitespace-pre-wrap">{{ result }}</pre>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
